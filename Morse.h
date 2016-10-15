@@ -6,23 +6,22 @@ Created by David A. Mellis, November 2, 2007. Released into the public domain.
 #define Morse_h
 #include "Arduino.h"
 
-#define dotPeriod 80
-#define dashPeriod (dotPeriod*3)
-#define relaxTime (dotPeriod/3)
-#define letterSpace (dotPeriod*3)
-#define wordSpace (dotPeriod*5)
-#define buzz 2000
-
 class Morse
 {
    public:
-   	Morse(int pin);
+   	Morse::Morse(int tonePin, int dotPeriod, int tone);
    	void play(String str);
    private:
    	void dit();
    	void dah();
    	void playLetter(char x);
-   	int _tonepin;
+   	int _tonePin;
+   	int _dotPeriod;
+   	int _tone;
+   	int _dashPeriod; 
+   	int _relaxTime;
+   	int _letterSpace;
+   	int _wordSpace;
 };
 
 #endif

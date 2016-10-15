@@ -3,32 +3,39 @@ Morse.cpp - Library for flashing Morse code. Created by David A. Mellis, Novembe
 */
 #include "Morse.h"
 
-Morse::Morse(int pin){
-	pinMode(pin, OUTPUT);
-  _tonepin = pin;
-
+Morse::Morse(int tonePin, int dotPeriod, int tone){
+	pinMode(tonePin, OUTPUT);
+  _tonePin = tonePin;
+  _dotPeriod = dotPeriod;
+  _tone = tone;
+  _dashPeriod = dotPeriod*3;
+  _relaxTime = dotPeriod/3;
+  _letterSpace = dotPeriod*3;
+  _wordSpace = dotPeriod*5;
+  
 }
+
 
 void Morse::play(String str){
   int endofstring = str.length();
     for(int Index=0; Index<=endofstring; Index++) {
     playLetter(str.charAt(Index)); //Executes the playLetter function defined earlier
-    delay(letterSpace); //Waits for 3 times unit duration between letters in words
+    delay(_letterSpace); //Waits for 3 times unit duration between letters in words
   }
 }
 
 void Morse::dit(){
-  tone(_tonepin, buzz);
-  delay(dotPeriod);
-  noTone(_tonepin);
-  delay(relaxTime);
+  tone(_tonePin, _tone);
+  delay(_dotPeriod);
+  noTone(_tonePin);
+  delay(_relaxTime);
 }
 
 void Morse::dah(){
-  tone(_tonepin, buzz);
-  delay(dashPeriod);
-  noTone(_tonepin);
-  delay(relaxTime);
+  tone(_tonePin, _tone);
+  delay(_dashPeriod);
+  noTone(_tonePin);
+  delay(_relaxTime);
 }
 
 void Morse::playLetter(char letter){
@@ -70,15 +77,15 @@ void Morse::playLetter(char letter){
    case '8': dotdashcode = "---.."; break;
    case '9': dotdashcode = "----."; break;
    case '0': dotdashcode = "-----"; break;
-   case ' ': dotdashcode = " "; break; /* We've inserted the wordSpace delay to make sure it relaxes when the letter is a space */ 
+   case ' ': dotdashcode = " "; break; /* We've inserted the _wordSpace delay to make sure it relaxes when the letter is a space */ 
   }
   int endofstring = dotdashcode.length();
   for(int Index=0; Index<=endofstring; Index++) {
     switch(dotdashcode.charAt(Index)){
       case '.': dit(); break;
       case '-': dah(); break;
-      case ' ': delay(wordSpace);
+      case ' ': delay(_wordSpace);
     }
   }
-  delay(letterSpace); //Waits for 3 times unit duration between letters in words
+  delay(_letterSpace); //Waits for 3 times unit duration between letters in words
 }

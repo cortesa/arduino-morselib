@@ -11,7 +11,15 @@ git clone https://github.com/cortesa/arduino-morselib.git
 ## Use
 
 ### Configuration
-    Morse Morse(outputPin);
+    Morse Morse(outputPin, dotPeriod, tone)
+
+    - outputPin: Pin where tone go out.
+    - dotPeriod: this define the length of a dot, a dash and silent time are function of this in ms:
+    		- dash length: dotPeriod * 3.
+    		- Silent length between dots or dashes: dotPeriod / 3.
+    		- Silent length between letters: dotPeriod * 3.
+    		- Silent length between words: dotPeriod * 5.
+    - tone: Frecuency of the tone in Hz.
 
 ### Play morse
 
@@ -23,7 +31,7 @@ git clone https://github.com/cortesa/arduino-morselib.git
 ```c++
 #include <Morse.h>
 
-Morse Morse(2);
+Morse Morse(2, 80, 1000);
 
 void setup()
 {
@@ -32,8 +40,8 @@ void setup()
 
 void loop()
 { 
-  Morse.play("SOS ");
-  delay(1000);
+  Morse.play("SOS");
+  delay(4000);
 }
 ```
 
