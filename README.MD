@@ -1,4 +1,5 @@
 # arduino-morselib
+    This library can transform a String to a Morse tones using a buzzer connected to an arduino board.
 
 ## Installation.
 
