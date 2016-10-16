@@ -24,7 +24,7 @@ git clone https://github.com/cortesa/arduino-morselib.git
 ### Play morse
 
     Morse.play("string to convert"); 
-    **Note:** string to convert have to be in capitals, only letters and numbers.
+    **Note:** The string to convert have to be in capitals and only letters and numbers.
 
 ## Diagram
 
