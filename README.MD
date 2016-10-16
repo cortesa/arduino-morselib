@@ -26,6 +26,10 @@ git clone https://github.com/cortesa/arduino-morselib.git
     Morse.play("string to convert"); 
     **Note:** string to convert have to be in capitals, only letters and numbers.
 
+## Diagram
+
+![Connection Diagram](./img/connection.png)
+
 ## Example
 
 ```c++
